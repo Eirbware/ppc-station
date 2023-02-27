@@ -1,0 +1,20 @@
+name: Iterface compilation
+run-name: ${{ github.actor }} is compiling the interface 
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add i386 architecture
+        run: sudo dpkg --add-architecture i386
+      - name: Install dependencies
+        run: sudo apt-get install libwebkit2gtk-4.0-37:i386 libwebkit2gtk-4.0-dev:i386 libgtk-3-0:i386 libgtk-3-dev:i386 libcairo2:i386 libcairo2-dev:i386 nodejs npm rust cargo
+      - name: Setup PKG_CONFIG_SYSROOT_DIR
+        run: export PKG_CONFIG_SYSROOT_DIR=/usr/lib/i386-linux-gnu
+      - name: Compile interface
+        run: npm run tauri -- build -t i686-unknown-linux-gnu
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: interface.deb
+          path: interface/src-tauri/target/i686-unknown-linux-gnu/release/bundle/deb/interface_0.0.0_i386.deb

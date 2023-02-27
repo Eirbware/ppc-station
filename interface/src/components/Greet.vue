@@ -43,6 +43,15 @@ h1 {
     text-transform: uppercase;
 }
 
+@keyframes rotate-reverse {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @keyframes rotate {
     from {
         transform: rotate(0deg);

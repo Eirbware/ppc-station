@@ -59,11 +59,9 @@
     },
     "windows": [
       {
-        "fullscreen": false,
-        "height": 600,
-        "resizable": true,
-        "title": "interface",
-        "width": 800
+        "fullscreen": true,
+        "resizable": false,
+        "title": "interface"
       }
     ]
   }
