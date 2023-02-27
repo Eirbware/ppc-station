@@ -7,16 +7,31 @@ jobs:
     steps:
       - name: Add i386 architecture
         run: sudo dpkg --add-architecture i386
-      
-      - name: Update apt
-        run: sudo apt-get update
-      
-      - name: Install dependencies
-        run: sudo apt-get install libwebkit2gtk-4.0-37:i386 libwebkit2gtk-4.0-dev:i386 libgtk-3-0:i386 libgtk-3-dev:i386 libcairo2:i386 libcairo2-dev:i386 nodejs npm
+
+      - name: Install and cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.npm
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - uses: actions/checkout@v2
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libwebkit2gtk-4.0-37:i386 libwebkit2gtk-4.0-dev:i386 libgtk-3-0:i386 libgtk-3-dev:i386 libcairo2:i386 libcairo2-dev:i386 nodejs npm
+          version: 1.0.0
       
       - name: Install Rust and Cargo
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
       
+      - name: Move to ./interface
+        run: cd interface
+
       - name: Install NPM dependencies
         run: npm install
       
