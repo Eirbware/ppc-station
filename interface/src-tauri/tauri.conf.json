@@ -44,7 +44,7 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": "all",
+      "targets": "deb",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
@@ -61,7 +61,9 @@
       {
         "fullscreen": true,
         "resizable": false,
-        "title": "interface"
+        "title": "PPCStation-Interface",
+        "height": 480,
+        "width": 640
       }
     ]
   }
