@@ -1,6 +1,8 @@
 name: Interface compilation
 run-name: ${{ github.actor }} is compiling the interface 
 on: [push, pull_request]
+env:
+  PKG_CONFIG_SYSROOT_DIR: /usr/lib/i386-linux-gnu
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,9 +35,6 @@ jobs:
 
       - name: Install NPM dependencies 
         run: npm install --prefix interface/
-      
-      - name: Setup PKG_CONFIG_SYSROOT_DIR
-        run: export PKG_CONFIG_SYSROOT_DIR=/usr/lib/i386-linux-gnu
       
       - name: Compile interface
         run: npm run tauri --prefix interface/ -- build -t i686-unknown-linux-gnu
