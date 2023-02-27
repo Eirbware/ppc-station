@@ -28,18 +28,15 @@ jobs:
       
       - name: Install Rust and Cargo
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-      
-      - name: Move to ./interface
-        run: cd interface
 
-      - name: Install NPM dependencies
-        run: npm install
+      - name: Install NPM dependencies 
+        run: npm install --prefix interface/
       
       - name: Setup PKG_CONFIG_SYSROOT_DIR
         run: export PKG_CONFIG_SYSROOT_DIR=/usr/lib/i386-linux-gnu
       
       - name: Compile interface
-        run: npm run tauri -- build -t i686-unknown-linux-gnu
+        run: npm run tauri --prefix interface/ -- build -t i686-unknown-linux-gnu
       
       - name: Upload
         uses: actions/upload-artifact@v2
