@@ -2,7 +2,7 @@ name: Interface compilation
 run-name: ${{ github.actor }} is compiling the interface 
 on: [push, pull_request]
 env:
-  PKG_CONFIG_SYSROOT_DIR: /usr/lib/i386-linux-gnu
+  PKG_CONFIG_SYSROOT_DIR: /usr/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
 jobs:
   build:
     runs-on: ubuntu-latest
