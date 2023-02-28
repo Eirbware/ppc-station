@@ -5,7 +5,7 @@ env:
   PKG_CONFIG_SYSROOT_DIR: /usr/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04	
     steps:
       - name: Checkout
         uses: actions/checkout@v2
