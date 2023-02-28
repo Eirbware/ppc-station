@@ -31,7 +31,10 @@ jobs:
           rustup target add i686-unknown-linux-gnu
 
       - name: List directory
-        run: ls -la
+        run: |
+          pwd
+          ls -la
+          ls ..
 
       - name: Install NPM dependencies 
         run: npm install --prefix interface/
