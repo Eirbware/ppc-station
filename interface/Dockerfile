@@ -45,5 +45,6 @@ RUN source "$HOME/.cargo/env" \
 ENV NODE_PATH=$NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
 ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+# Setup pkg-config environment variables
 ENV PKG_CONFIG_SYSROOT_DIR=/usr/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
 ENV PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
