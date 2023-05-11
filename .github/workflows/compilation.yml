@@ -2,11 +2,14 @@ name: Interface compilation
 run-name: ${{ github.actor }} is compiling the interface 
 on: [push, pull_request]
 env:
-  PKG_CONFIG_SYSROOT_DIR: /usr/lib/i386-linux-gnu
+  PKG_CONFIG_SYSROOT_DIR: /usr/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04	
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Add i386 architecture
         run: sudo dpkg --add-architecture i386
 
@@ -22,11 +25,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
-      - uses: actions/checkout@v2
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: libwebkit2gtk-4.0-37:i386 libwebkit2gtk-4.0-dev:i386 libgtk-3-0:i386 libgtk-3-dev:i386 libcairo2:i386 libcairo2-dev:i386 nodejs npm libssl-dev:i386 libssl3:i386 libgtk-3-dev:i386
-          version: 1.0.0
+      - name: Install APT dependencies
+        run: sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.0-dev:i386 build-essential curl wget libssl-dev:i386 libgtk-3-dev:i386 libgtk-3-dev librsvg2-dev:i386 nodejs npm libsoup2.4-dev:i386 libsoup2.4-dev libjavascriptcoregtk-4.0-dev libjavascriptcoregtk-4.0-dev:i386 gcc-multilib g++-multilib
       
       - name: Install Rust and Cargo
         run: |

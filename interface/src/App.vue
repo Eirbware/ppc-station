@@ -19,5 +19,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 </style>
