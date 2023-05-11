@@ -1,26 +1,29 @@
 <template>
-  <img src="../assets/logo_glc.svg" />
-  <h1>Appuyez sur le bouton vert pour commencer</h1>
+    <img src="../assets/logo_glc.svg" />
+    <h1>Appuyez sur le bouton vert pour commencer</h1>
 </template>
 
 <script>
+import { invoke } from '@tauri-apps/api/tauri'
+
 export default {
     name: 'Badge-Scan',
     mounted() {
-        const backup = document.onkeypress;
+        this.$store.dispatch('resetData');
 
-        const wakeUp = (event) => {
+        const handleKeyPress = (event) => {
             event = event || window.event;
 
             // 13 == <Enter>
-            if (event.keyCode === 13) {
-                document.onkeypress = backup;
+            if (event.code === 'Enter') {
+                document.removeEventListener('keypress', handleKeyPress);
+                // Load /tahir_welcome.mp3 and play it
+                this.$store.dispatch('playAudio', '../tahir_welcome.mp3');
                 this.$router.push('/badge-scan')
             }
         }
 
-        // Wait for user to press <Enter>
-        document.onkeypress = wakeUp;
+        document.addEventListener('keypress', handleKeyPress);
     }
 }
 </script>
@@ -47,6 +50,7 @@ h1 {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -56,6 +60,7 @@ h1 {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }

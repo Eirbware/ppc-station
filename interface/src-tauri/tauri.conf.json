@@ -2,7 +2,7 @@
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
+    "devPath": "http://localhost:8080",
     "distDir": "../dist",
     "withGlobalTauri": false
   },
@@ -52,15 +52,15 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": ""
     },
     "updater": {
       "active": false
     },
     "windows": [
       {
-        "fullscreen": true,
-        "resizable": false,
+        "fullscreen": false,
+        "resizable": true,
         "title": "PPCStation-Interface",
         "height": 480,
         "width": 640
